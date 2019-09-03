@@ -16,7 +16,7 @@ class UserProfileManager(BaseUserManager):
         user = self.model(email=email, name=name)
 
         user.set_password(password)
-        user.save(using=self.db)
+        user.save(using=self._db)
 
         return user
 
@@ -26,7 +26,7 @@ class UserProfileManager(BaseUserManager):
 
         user.is_superuser = True
         user.is_staff = True
-        user.save(using=self.db)
+        user.save(using=self._db)
 
         return user
 
@@ -44,8 +44,8 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['name']
 
     def get_full_name(self):
-        """Retrieive full nam eof user"""
-        return self.NAME
+        """Retrieive full name of user"""
+        return self.name
 
     def get_short_name(self):
         """Retieve shor name of user"""
